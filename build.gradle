@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+}
+
+group 'LinkedinLearningCoursesDownloader'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    testImplementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
+    testImplementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+
+}
+
+test {
+    // enable TestNG support (default is JUnit)
+    useTestNG();
+}
