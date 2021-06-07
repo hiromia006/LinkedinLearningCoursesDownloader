@@ -160,11 +160,11 @@ public class Linkedin_Learning_Courses_Downloader {
             } catch (Exception e) {
                 e.printStackTrace();
                 driver.quit();
-//                downloadVideo();
+                downloadVideo();
             }
 
             driver.quit();
-//            downloadVideo();
+            downloadVideo();
         }
     }
 
