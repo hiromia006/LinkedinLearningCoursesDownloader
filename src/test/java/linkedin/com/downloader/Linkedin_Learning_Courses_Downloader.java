@@ -185,21 +185,25 @@ public class Linkedin_Learning_Courses_Downloader {
         BufferedReader br = new BufferedReader(fr);
         String st;
         while ((st = br.readLine()) != null) {
-            String videoUrl = st.split(" =>")[0].trim();
-            String videoTittle = st.split(" =>")[1].trim().replaceAll("[^a-zA-Z0-9 _]", "").trim();
-            System.out.println("Video download start -- :: " + videoTittle);
+            String[] contents = st.split(" =>");
 
-            try (BufferedInputStream in = new BufferedInputStream(new URL(Linkedin_Learning_Courses_Downloader.getFinalLocation(videoUrl)).openStream());
-                 FileOutputStream fileOutputStream = new FileOutputStream(rootPth + "/" + videoTittle + ".MP4")) {
-                byte dataBuffer[] = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                    fileOutputStream.write(dataBuffer, 0, bytesRead);
+            if (contents.length == 2) {
+                String videoUrl = contents[0].trim();
+                String videoTittle = contents[1].trim().replaceAll("[^a-zA-Z0-9 _]", "").trim();
+                System.out.println("Video download start -- :: " + videoTittle);
+
+                try (BufferedInputStream in = new BufferedInputStream(new URL(Linkedin_Learning_Courses_Downloader.getFinalLocation(videoUrl)).openStream());
+                     FileOutputStream fileOutputStream = new FileOutputStream(rootPth + "/" + videoTittle + ".MP4")) {
+                    byte dataBuffer[] = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                        fileOutputStream.write(dataBuffer, 0, bytesRead);
+                    }
+
+                    System.out.println("Video download Complete :: " + videoTittle);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                System.out.println("Video download Complete :: " + videoTittle);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
 
